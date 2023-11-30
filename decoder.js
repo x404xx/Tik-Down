@@ -1,34 +1,20 @@
-var _0xc56e = [
-    '',
-    'split',
-    '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/',
-    'slice',
-    'indexOf',
-    '',
-    '',
-    '.',
-    'pow',
-    'reduce',
-    'reverse',
-    '0',
-];
-
-function _0xe34c(d, e, f) {
-    var g = _0xc56e[2][_0xc56e[1]](_0xc56e[0]);
-    var h = g[_0xc56e[3]](0, e);
-    var i = g[_0xc56e[3]](0, f);
-    var j = d[_0xc56e[1]](_0xc56e[0])
-        [_0xc56e[10]]()
-        [_0xc56e[9]](function (a, b, c) {
-            if (h[_0xc56e[4]](b) !== -1)
-                return (a += h[_0xc56e[4]](b) * Math[_0xc56e[8]](e, c));
+function _to_decimal(d, e, f) {
+    var g = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/'.split('');
+    var h = g.slice(0, e);
+    var i = g.slice(0, f);
+    var j = d
+        .split('')
+        .reverse()
+        .reduce(function (a, b, c) {
+            if (h.indexOf(b) !== -1)
+                return (a += h.indexOf(b) * Math.pow(e, c));
         }, 0);
-    var k = _0xc56e[0];
+    var k = '';
     while (j > 0) {
         k = i[j % f] + k;
         j = (j - (j % f)) / f;
     }
-    return k || _0xc56e[11];
+    return k || '0';
 }
 
 function result(h, _, n, t, e, r) {
@@ -41,7 +27,7 @@ function result(h, _, n, t, e, r) {
         }
         for (var j = 0; j < n.length; j++)
             s = s.replace(new RegExp(n[j], 'g'), j);
-        r += String.fromCharCode(_0xe34c(s, e, 10) - t);
+        r += String.fromCharCode(_to_decimal(s, e, 10) - t);
     }
     return decodeURIComponent(escape(r));
 }
