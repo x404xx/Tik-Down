@@ -30,8 +30,9 @@ from api import Colors, SnaptikDownloader
 
 if __name__ == '__main__':
     """
-    Support both type of tiktok URL;
+    Supported TikTok URL;
      [>] https://vt.tiktok.com/ZSN9kJose
+     [>] https://vm.tiktok.com/ZSNxSA1C4/
      [>] https://www.tiktok.com/@anttonraccaus/video/7279062551613246752?is_from_webapp=1&sender_device=pc
     """
 
