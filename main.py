@@ -12,6 +12,6 @@ if __name__ == '__main__':
 
     os.system('cls' if os.name == 'nt' else 'clear')
 
-    logging_enabled = True
+    logging_enabled = False
     tiktok_url = input(f'{Colors.GREEN}Tiktok target URL{Colors.END}: ')
     SnaptikDownloader(tiktok_url, logging_enabled).start_download()
