@@ -25,6 +25,7 @@ class SnaptikDownloader:
     TIMEOUT = 10
     DECODER_FILE = 'decoder.js'
     DIRECTORY = 'Tiktok Videos'
+    BASE_URL = 'https://snaptik.app'
     HEADERS = {'User-Agent': generate_user_agent()}
 
     def __init__(self, tiktok_url, logging_enabled=True):
@@ -42,14 +43,14 @@ class SnaptikDownloader:
         self.client.close()
 
     def _get_token(self):
-        response = self.client.get('https://snaptik.app/')
+        response = self.client.get(self.BASE_URL)
         response.raise_for_status()
         matches = re.search(r'name="token" value="(.*?)"', response.text)
         self.token = matches.group(1) if matches else None
 
     def _get_variable(self):
         data = {'url': self.tiktok_url, 'token': self.token}
-        response = self.client.post('https://snaptik.app/abc2.php', data=data)
+        response = self.client.post(f'{self.BASE_URL}/abc2.php', data=data)
         response.raise_for_status()
         return response.text
 
@@ -101,11 +102,11 @@ class SnaptikDownloader:
             print(f'Video has been saved in {Colors.LPURPLE}{filename}{Colors.END}\n')
 
     def _get_video_id(self):
-        if self.tiktok_url.startswith('https://v'):
-            self.video_id = self.tiktok_url.split('/')[-1]
-        elif self.tiktok_url.startswith('https://www'):
+        if self.tiktok_url.startswith(('https://vt.tiktok.com', 'https://vm.tiktok.com')):
+            self.video_id = self.tiktok_url.split('/')[-2] if self.tiktok_url.endswith('/') else self.tiktok_url.split('/')[-1]
+        elif self.tiktok_url.startswith('https://www.tiktok.com'):
             self.video_id = self.tiktok_url.split('/')[5].split('?')[0]
-        elif not self.tiktok_url.startswith('https://'):
+        else:
             raise ValueError('Check your URL!')
 
     def start_download(self):
