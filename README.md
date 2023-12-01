@@ -42,6 +42,10 @@ if __name__ == '__main__':
     SnaptikDownloader(tiktok_url, logging_enabled).start_download()
 ```
 
+## Run Without JS
+
+-   You can [Click Here](https://github.com/x404xx/Tik-Down/tree/main/Run%20without%20JS)
+
 ## **Legal Disclaimer**
 
 > This was made for educational purposes only, nobody which directly involved in this project is responsible for any damages caused. **_You are responsible for your actions._**
