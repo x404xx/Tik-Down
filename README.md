@@ -11,7 +11,6 @@
 ## Prerequisites
 
 -   [Python](https://www.python.org/) (version 3.6 or higher)
--   [NodeJS](https://nodejs.org/en) (for decoder)
 
 ## Installation
 
@@ -42,10 +41,6 @@ if __name__ == '__main__':
     tiktok_url = input(f'{Colors.GREEN}Tiktok target URL{Colors.END}: ')
     SnaptikDownloader(tiktok_url, logging_enabled).start_download()
 ```
-
-## Run Without JS
-
--   You can [Click Here](https://github.com/x404xx/Tik-Down/tree/main/Run%20without%20JS)
 
 ## **Legal Disclaimer**
 
