@@ -1,4 +1,3 @@
 httpx==0.25.2
 user_agent==0.1.10
-PyExecJS2==1.6.1
 rich==13.7.0

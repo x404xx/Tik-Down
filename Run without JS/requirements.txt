@@ -1,4 +1,0 @@
-httpx==0.25.2
-user_agent==0.1.10
-Js2Py==0.74
-rich==13.7.0

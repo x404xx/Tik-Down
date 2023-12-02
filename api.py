@@ -2,7 +2,6 @@ import logging
 import os
 import re
 
-import execjs
 from httpx import Client
 from rich.progress import (
     BarColumn,
@@ -12,6 +11,8 @@ from rich.progress import (
     TransferSpeedColumn
 )
 from user_agent import generate_user_agent
+
+from decoder import deobfuscator
 
 
 class Colors:
@@ -23,7 +24,6 @@ class Colors:
 
 class SnaptikDownloader:
     TIMEOUT = 10
-    DECODER_FILE = 'decoder.js'
     DIRECTORY = 'Tiktok Videos'
     BASE_URL = 'https://snaptik.app'
     HEADERS = {'User-Agent': generate_user_agent()}
@@ -55,15 +55,12 @@ class SnaptikDownloader:
         return response.text
 
     def _extract_variable(self, variable_text):
-        pattern = r'\("(\w+)",(\d+),"(\w+)",(\d+),(\d+),(\d+)\)'
+        pattern = r'\("(\w+)",\d+,"(\w+)",(\d+),(\d+),\d+\)'
         return re.search(pattern, variable_text).groups()
 
     def _variable_decoder(self, variable_tuple):
-        with open(self.DECODER_FILE, 'r') as file:
-            javascript_code = file.read()
-
-        context = execjs.compile(javascript_code)
-        return context.call('result', *variable_tuple)
+        con_var = [int(x) if x.isdigit() else x for x in variable_tuple]
+        return deobfuscator(*con_var)
 
     def _match_pattern(self, pattern, html_source):
         matches = re.search(pattern, html_source)
@@ -117,4 +114,3 @@ class SnaptikDownloader:
         self.video_link = self._extract_snaptik_link(html_source)
         self._get_video_id()
         self._video_downloader()
-
