@@ -8,10 +8,10 @@
 
 </div>
 
-## Git URL
+## Git Clone
 
 ```
-https://github.com/x404xx/Tik-Down.git
+git clone https://github.com/x404xx/Tik-Down.git
 ```
 
 ## Installation
